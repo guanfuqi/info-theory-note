@@ -1053,7 +1053,7 @@ $
     $
     $0 <= D <= sigma^2$时, 令$G ~ cal(N)\(0\,D\)$ $V = hat(V) + G .$
     $hat(V)$ 与 $G$ 独立. 可以满足取等条件.\
-    $D > sigma^2$ 时, 取$hat(V) = 0$ 可满足$EE((hat(V) - V)^2) <= D$, 同时$I(V; hat(V))=0$.
+    $D > sigma^2$ 时, 取$hat(V) = 0$ 可满足$EE[(hat(V) - V)^2] <= D$, 同时$I(V; hat(V))=0$.
 
     // $ hat(V) ~ cal(N)\(0\,sigma^2 - D\) $
 
