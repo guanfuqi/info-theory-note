@@ -879,16 +879,45 @@ $
   h ( X ^ ( n ) ) = h ( X _ ( 1 ), X _ ( 2 ),... X _ ( n ) ) = ( n ) / ( 2 ) log ( 2 pi e ) + ( 1 ) / ( 2 ) log abs( bold( upright( Sigma ) ) )
 $
 
-#remark[高斯分布是最大微分熵分布][
+#property[高斯分布是最大微分熵分布][
   对任意 $n$ 维期望为 $bold(mu)$ 且协方差为$bold(Sigma)$ 的分布 $X^n$ ，其熵：
-  $ h ( X ^ ( n ) ) = h ( X _ ( 1 ), X _ ( 2 ),... X _ ( n ) ) = ( n ) / ( 2 ) log ( 2 pi e ) + ( 1 ) / ( 2 ) log abs( bold( upright( Sigma ) ) ) $
+  $ h ( X ^ ( n ) ) <= ( n ) / ( 2 ) log ( 2 pi e ) + ( 1 ) / ( 2 ) log abs( bold( upright( Sigma ) ) ) $
+
+  #proof[
+    记 $X^n$ 的分布为 $f$. 记n维期望为 $bold(mu)$, 方差为 $bold(Sigma)$ 的高斯分布为 $g$.
+    $
+      h(X^n) &= KL(f||g) + "CE"(f, g)\
+      &<= "CE"(f, g)\
+      &= EE _ ( f ) [ - log g ( bold(x) ) ]\
+      &= 1/2 EE_f [ n log(2pi) + log(abs(bold(Sigma))) + log e ( x - mu ) ^ ( T ) bold( upright( Sigma ) ) ^ ( - 1 ) ( x - mu )]\
+      &= 1/2(n log(2pi) + log(abs(bold(Sigma)))) + log e #redbold($EE_f [tr(( x - mu ) ^ ( T ) bold( upright( Sigma ) ) ^ ( - 1 ) ( x - mu ))]$)\
+      &= ( n ) / ( 2 ) log ( 2 pi e ) + ( 1 ) / ( 2 ) log abs( bold( upright( Sigma ) ) )\
+    $
+    最后一步是因为
+    $
+      #redbold($EE_f [tr(( x - mu ) ^ ( T ) bold( upright( Sigma ) ) ^ ( - 1 ) ( x - mu ))]$) 
+      &= EE_f [tr( bold( upright( Sigma ) ) ^ ( - 1 ) ( x - mu ) ( x - mu ) ^ ( T ))]\
+      &= tr( EE_f [ bold( upright( Sigma ) ) ^ ( - 1 ) ( x - mu ) ( x - mu ) ^ ( T )])\
+      &= tr( bold( upright( Sigma ) ) ^ ( - 1 ) EE_f [ ( x - mu ) ( x - mu ) ^ ( T )])\
+      &= tr( bold( upright( Sigma ) ) ^ ( - 1 ) bold( upright( Sigma ) ))\
+      &= n\
+    $
+
+    #remark[
+      从该证明中可见, 对于高斯分布 $g(bold(x))$, 任意同期望, 同方差的分布 $f(bold(x))$
+      $
+        "CE"(g, f) = h(g)
+      $
+    ]
+
+  ]
 ]
 
 ]
 
 
 #property[互信息][
-  $ I(X^m;Y^n)= h(X^m)+ h(Y^n)- h(X^m,Y^n)= 1 / 2 upright(l o g) frac(|Sigma_(X^m)||Sigma_(I^n)|, lr(|Sigma_(j o i n t)|)) $
+  $ I(X^m;Y^n)= h(X^m)+ h(Y^n)- h(X^m,Y^n)= 1 / 2 upright(l o g) frac(|Sigma_(X^m)||Sigma_(Y^n)|, lr(|Sigma_(j o i n t)|)) $
   #remark[高斯分布的互信息衡量线性相关性][
     $I(X_1;X_2)= 0$ 当且仅当 $rho = 0$
 
