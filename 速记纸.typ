@@ -874,12 +874,14 @@ Markov链的另一个等价定义是:如果$X bot Y | Z$, 称随机变量 $X, Y,
 ]
 
 #property[微分熵][
-$X^n =\(X_1\,X_2\,. . . X_n\)tilde.op cal(N)\(bold(mu)\,bold(Sigma)\)$那么
-$ h\(X^n\)= h\(X_1\,X_2\,dots.h X_n\)= n / 2 log\(2 pi e\)+ 1 / 2 log\|upright(bold(Sigma))\| $
+$X ^ ( n ) = ( X _ ( 1 ), X _ ( 2 ),... X _ ( n ) ) tilde cal( N ) ( mu, Sigma)$那么
+$
+  h ( X ^ ( n ) ) = h ( X _ ( 1 ), X _ ( 2 ),... X _ ( n ) ) = ( n ) / ( 2 ) log ( 2 pi e ) + ( 1 ) / ( 2 ) log abs( bold( upright( Sigma ) ) )
+$
 
 #remark[高斯分布是最大微分熵分布][
   对任意 $n$ 维期望为 $bold(mu)$ 且协方差为$bold(Sigma)$ 的分布 $X^n$ ，其熵：
-  $ h\(X^n\)lt.eq n / 2 log\(2 pi e\)+ 1 / 2 log\|Sigma\| $
+  $ h ( X ^ ( n ) ) = h ( X _ ( 1 ), X _ ( 2 ),... X _ ( n ) ) = ( n ) / ( 2 ) log ( 2 pi e ) + ( 1 ) / ( 2 ) log abs( bold( upright( Sigma ) ) ) $
 ]
 
 ]
