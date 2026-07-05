@@ -19,52 +19,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ✅ 缓存字体（放在安装字体之前）
-      - name: Cache Fonts
-        uses: actions/cache@v3
-        with:
-          path: ~/.fontist
-          key: fonts-${{ runner.os }}-${{ hashFiles('**/*.typ') }}
-          restore-keys: |
-            fonts-${{ runner.os }}-
-
       - name: Setup Typst
         uses: typst-community/setup-typst@v5
-        with:
-          cache-dependency-path: |
-            main.typ
-            **/*.typ
+        # with:
+        #   cache-dependency-path: |
+        #     main.typ
+        #     **/*.typ
 
-      - name: Install Fonts
-        run: |
-          gem install fontist
-          
-          # ✅ 只安装 fontist 确实支持的字体
-          fontist install "IBM Plex Serif" || true
-          fontist install "Noto Serif SC" || true
-          fontist install "Noto Sans SC" || true
-          # KaiTi 已被移除（fontist 不支持）
-          
-          # 验证字体
-          fc-list :lang=zh | head -5
+      - name: Clone fonts repository
+        run: git clone https://github.com/touying-typ/fonts.git fonts --depth=1
 
       - name: Compile Typst
-        run: |
-          # ✅ 确保输出文件名一致
-          typst compile main.typ 信息论笔记.pdf
+        run: typst compile main.typ 信息论笔记.pdf --font-paths fonts
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
-          name: 信息论笔记        # 下载后的文件夹名
-          path: 信息论笔记.pdf    # ✅ 与编译输出一致
+          name: 信息论笔记        
+          path: 信息论笔记.pdf    
           retention-days: 7
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
         if: github.ref_type == 'tag'
         with:
-          files: 信息论笔记.pdf   # ✅ 与编译输出一致
+          files: 信息论笔记.pdf   
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
