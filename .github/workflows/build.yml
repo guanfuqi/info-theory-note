@@ -27,7 +27,7 @@ jobs:
         #     **/*.typ
 
       - name: Clone fonts repository
-        run: git clone https://github.com/touying-typ/fonts.git fonts --depth=1
+        run: git clone https://github.com/guanfuqi/fonts.git fonts --depth=1
 
       - name: Compile Typst
         run: typst compile main.typ 信息论笔记.pdf --font-path fonts
