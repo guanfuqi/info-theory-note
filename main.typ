@@ -9,6 +9,10 @@
 // 为所有块级公式启用跨页
 #show math.equation: set block(breakable: true)
 #set-inherited-levels(1)
+#show heading.where(level: 1): it => {
+  pagebreak()
+  it
+}
 
 
 #let crimson = rgb("#c00000")
@@ -189,6 +193,56 @@ $
 #property[互信息的凹凸性][
   $p(Y|X)$ 确定时, $I(X; Y)$ 是 $p(X)$ 的凹函数.\
   $p(X)$ 确定时, $I(X; Y)$ 是 $p(Y|X)$ 的凸函数.
+
+  #proof[
+    $I(X;Y)$ 可以展开成如下形式：
+    $
+      I(X; Y) 
+      &= sum_(X Y) p(x) p(y|x) log p(y|x) / p(y)\
+      &= sum_(X Y) p(x) p(y|x) log p(y|x)/(sum_X p(x)p(y|x))\
+    $<互信息1>
+    #redbox(width: 100%)[
+      *命题1: $p(Y|X)$ 确定时, $I(X; Y)$ 是 $p(X)$ 的凹函数.*
+      接着@eqt:互信息1 可得:
+      $
+        I(X; Y) 
+        &= sum_(X Y) p(x) p(y|x) log p(y|x) - #redbold($sum_(X Y) p(x) p(y|x) log (sum_X p(x)p(y|x))$)
+      $ 
+      $p(Y|X)$ 确定时, 上式第一项关于$p(X)$线性, 下面考虑第二项.\
+      令 $G(p(X)) = #redbold($sum_(X Y) p(x) p(y|x) log (sum_X p(x)p(y|x))$)$, 对任意 $0 < lambda < 1$
+      $
+        & lambda G(p_1(X)) + (1- lambda) G(p_2(X))\
+        =& lambda sum_(X Y) p_1(x) p(y|x) log (sum_X p_1(x)p(y|x)) \ &quad+ (1- lambda) sum_(X Y) p_2(x) p(y|x) log (sum_X p_2(x)p(y|x))\
+        =&  sum_(Y) (sum_X lambda p_1(x) p(y|x) log (sum_X p_1(x)p(y|x)) \ &quad+ sum_X (1- lambda) p_2(x) p(y|x) log (sum_X p_2(x)p(y|x)))\
+        =&  sum_(Y) (#redbold($sum_X lambda p_1(x)p(y|x)$) log (#redbold($sum_X lambda p_1(x)p(y|x)$))/#redbold($lambda$)  \ &quad+ #blueit($sum_X (1-lambda) p_2(x)p(y|x)$) log (#blueit($sum_X (1-lambda) p_2(x)p(y|x)$))/(#blueit($1-lambda$)))\
+        >=&  sum_(Y) sum_X #redbold($lambda p_1(x)p(y|x)$) + #blueit($(1-lambda) p_2(x) p(y|x))$) log (sum_X #redbold($lambda p_1(x)p(y|x)$) + #blueit($(1-lambda) p_2(x) p(y|x)$))/(#redbold($lambda$) + #blueit($1 - lambda$)) \
+        =&  sum_(Y) (sum_X (lambda p_1(x) + (1- lambda) p_2(x))p(y|x)) log (sum_X (lambda p_1(x) + (1- lambda) p_2(x)) p(y|x)) \
+        =& G(lambda p_1(X) + (1- lambda) p_2(X))
+      $
+    不等式那一步利用了@log-sum[!!].
+
+    所以 $G(p(x))$ 关于$p(X)$是凸的. 从而$I(X; Y) = sum_(X Y) p(x) p(y|x) log p(y|x) - G(p((X))$ 关于 $P(X)$ 是凹函数.
+    ]
+    #bluebox(width: 100%)[
+      *命题2: $p(X)$ 确定时, $I(X; Y)$ 是 $p(Y|X)$ 的凸函数.*
+
+      利用@eqt:互信息1 展开 $lambda I_(p_1(Y|X)) (X; Y) + (1- lambda) I_(p_2(Y|X)) (X;Y))$:
+      $
+        &lambda I_(p_1(Y|X)) (X; Y) + (1- lambda) I_(p_2(Y|X)) (X;Y))\
+        =& sum_(X Y) p(x) [ lambda p_1(y|x) log (p_1(y|x)) / (sum_X p(x) p_1(y|x)) + (1-lambda) lambda p_2(y|x) log (p_2(y|x)) / (sum_X p(x) p_2(y|x))]\
+        =& sum_(X Y) p(x) [ #redbold($lambda p_1(y|x)$) log (#redbold($lambda p_1(y|x)$)) / #redbold($sum_X p(x) lambda p_1(y|x)$) + #blueit($(1-lambda) p_2(y|x)$) log (#blueit($(1-lambda) p_2(y|x)$)) / #blueit($sum_X p(x) (1-lambda)p_2(y|x)$)]\
+        >=& sum_(X Y) p(x) lr([ #redbold($lambda p_1(y|x)$) + #blueit($(1-lambda) p_2(y|x)$)], size: #200%) log (#redbold($lambda p_1(y|x)$) + #blueit($(1-lambda) p_2(y|x)$)) / (sum_X p(x) (#redbold($lambda p_1(y|x)$) + #blueit($(1-lambda) p_2(y|x)$)))\
+        &= I_(lambda p_1(Y|X) + (1 - lambda) p_2(Y|X)) (X; Y)
+      $
+      不等式那一步利用了@log-sum[!!].
+      
+      所以, $p(X)$ 确定时, $I(X; Y)$ 是 $p(Y|X)$ 的凸函数.
+    ]
+  ]
+
+  #remark[
+    在命题1的证明中, $-G(P(X)) = H(Y)$, 所以当 $P(Y|X)$ 确定时, $H(Y)$ 关于 $P(X)$ 是凹的.
+  ]
 ]
 
 = 渐进均分性
