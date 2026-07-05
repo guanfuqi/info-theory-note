@@ -9,11 +9,11 @@
 #let default-font = (
   main: "IBM Plex Serif",
   mono: "IBM Plex Mono",
-  cjk: "Noto Serif SC",
+  cjk: "Source Han Serif SC",
   emph-cjk: "KaiTi",
   math: "New Computer Modern Math",
-  math-cjk: "Noto Serif SC",
-  heading-cjk: "Noto Sans SC"
+  math-cjk: "Source Han Serif SC",
+  heading-cjk: "Source Han Sans SC"
 )
 
 // Definitions for math
