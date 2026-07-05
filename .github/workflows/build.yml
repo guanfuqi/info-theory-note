@@ -30,7 +30,7 @@ jobs:
         run: git clone https://github.com/touying-typ/fonts.git fonts --depth=1
 
       - name: Compile Typst
-        run: typst compile main.typ 信息论笔记.pdf --font-paths fonts
+        run: typst compile main.typ 信息论笔记.pdf --font-path fonts
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
