@@ -15,3 +15,4 @@
 git clone https://github.com/guanfuqi/fonts.git fonts --depth=1
 typst compile main.typ 信息论笔记.pdf --font-path fonts
 ```
+当然，也可以直接去Release直接下载pdf
