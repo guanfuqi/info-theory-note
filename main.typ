@@ -85,7 +85,7 @@ $
     H(X,Y) = H(X) + H(Y|X)
     $
     $
-    H(X,Y|Z) = H(X|Z) + H(X|Y,Z)
+    H(X,Y|Z) = H(X|Z) + H(Y|X,Z)
     $
     推广：
     $
@@ -390,7 +390,7 @@ $
   $
   #property[熵下标可平移][
     $ H(X_1^n) = H(X_k^(n + k - 1)) = H(X_(-n)^(-1)) $
-    $ H(X_n|X_1^(n-1)) = H(X_k + n| X_k^(k + n - 1)) = H(X_0|X_(-(n -1))^(-1)) $
+    $ H(X_n|X_1^(n-1)) = H(X_(k + n)| X_k^(k + n - 1)) = H(X_0|X_(-(n -1))^(-1)) $
   ]
   #property[平稳信源的熵率存在][
     平稳信源的熵率$H(cal(X))$存在, 且
@@ -871,7 +871,7 @@ Markov链的另一个等价定义是:如果$X bot Y | Z$, 称随机变量 $X, Y,
     $ max_u P hat(U) != U |U = u, C^*_n ) attach(-->, t:n->oo) 0 $
   ]
   #property[无记忆信道的互信息不等式][
-    $ I(X^n ; Y^n) <= sum_(i = - 1)^n I(X_i ; Y_i) $
+    $ I(X^n ; Y^n) <= sum_(i = 1)^n I(X_i ; Y_i) $
     #proof[
     $
     I(X^n ; Y^n) &= H(Y^n) - H(Y^n |X^n)\
