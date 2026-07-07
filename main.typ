@@ -1101,7 +1101,7 @@ $
     $
     I(V; hat(V)) &= H(V) - H(V|hat(V))\
     &= H(V) - H(V - hat(V) | hat(V))\
-    &>= H(V) - H(V - hat(V)) (#[当且仅当$V - hat(V) bot hat(V)$时取等]\
+    &>= H(V) - H(V - hat(V)) (#[当且仅当$V - hat(V) bot hat(V)$时取等])\
     &>= H(V) - H(cal(N)(0, D)) (#[当且仅当$V - hat(V) ~ cal(N)(0,D)$时取等])\
     &= 1/2 log sigma^2/D
     $
